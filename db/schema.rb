@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308034438) do
+ActiveRecord::Schema.define(version: 20160311011419) do
 
   create_table "games", force: :cascade do |t|
-    t.integer  "scorecard",  limit: 8
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "scorecard",         limit: 8
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "winner_1_id",       limit: 4
+    t.integer  "winner_2_id",       limit: 4
+    t.integer  "loser_1_id",        limit: 4
+    t.integer  "loser_2_id",        limit: 4
+    t.integer  "first_server_1_id", limit: 4
+    t.integer  "first_server_2_id", limit: 4
   end
+
+  add_index "games", ["first_server_1_id"], name: "index_games_on_first_server_1_id", using: :btree
+  add_index "games", ["first_server_2_id"], name: "index_games_on_first_server_2_id", using: :btree
+  add_index "games", ["loser_1_id"], name: "index_games_on_loser_1_id", using: :btree
+  add_index "games", ["loser_2_id"], name: "index_games_on_loser_2_id", using: :btree
+  add_index "games", ["winner_1_id"], name: "index_games_on_winner_1_id", using: :btree
+  add_index "games", ["winner_2_id"], name: "index_games_on_winner_2_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -27,4 +40,10 @@ ActiveRecord::Schema.define(version: 20160308034438) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "games", "players", column: "first_server_1_id"
+  add_foreign_key "games", "players", column: "first_server_2_id"
+  add_foreign_key "games", "players", column: "loser_1_id"
+  add_foreign_key "games", "players", column: "loser_2_id"
+  add_foreign_key "games", "players", column: "winner_1_id"
+  add_foreign_key "games", "players", column: "winner_2_id"
 end
