@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: ping_pong_ladder_development
+  database: ping_pong_league_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: ping_pong_ladder_test
+  database: ping_pong_league_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: ping_pong_ladder_production
-  username: ping_pong_ladder
-  password: <%= ENV['PING_PONG_LADDER_DATABASE_PASSWORD'] %>
+  database: ping_pong_league_production
+  username: ping_pong_league
+  password: <%= ENV['PING_PONG_LEAGUE_DATABASE_PASSWORD'] %>
